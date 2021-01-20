@@ -10,6 +10,8 @@ const mount = (el) => {
   );
 }
 
+console.log('Co co');
+
 // Dev, isolation, prod
 if (process.env.NODE_ENV === 'development') {
   const el = document.querySelector('#_marketing-dev-root');
