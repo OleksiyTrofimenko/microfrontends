@@ -1,9 +1,10 @@
+// Mount function to start the app
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -14,7 +15,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, el);
+  ReactDOM.render(<App onSignIn={onSignIn} history={history} />, el);
 
   return {
     onParentNavigate({ pathname: nextPathname }) {
@@ -29,7 +30,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 
 // Dev, isolation, prod
 if (process.env.NODE_ENV === 'development') {
-  const el = document.querySelector('#_marketing-dev-root');
+  const el = document.querySelector('#_auth-dev-root');
 
   if (el) {
     mount(el, { defaultHistory: createBrowserHistory() });
