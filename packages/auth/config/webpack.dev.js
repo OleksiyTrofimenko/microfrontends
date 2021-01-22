@@ -16,6 +16,14 @@ const devConfig = {
     },
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'auth',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './AuthApp': './src/bootstrap',
+      },
+      shared: packageJson.dependencies,
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),

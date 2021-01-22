@@ -1,4 +1,3 @@
-// merge two webpack configs
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
@@ -16,7 +15,7 @@ const devConfig = {
       index: 'index.html',
     },
     headers: {
-      'Access-Control-Allow-Origin': '*', // we're going to load some font outside of container
+      'Access-Control-Allow-Origin': '*',
     },
   },
   plugins: [

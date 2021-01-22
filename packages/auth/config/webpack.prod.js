@@ -9,6 +9,16 @@ const prodConfig = {
     filename: '[name].[contenthash].js',
     publicPath: '/auth/latest/',
   },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'auth',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './AuthApp': './src/bootstrap',
+      },
+      shared: packageJson.dependencies,
+    }),
+  ],
 };
 
 module.exports = merge(commonConfig, prodConfig);
