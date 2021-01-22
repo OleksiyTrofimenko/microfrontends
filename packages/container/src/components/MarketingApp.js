@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
 import { mount } from 'marketing/MarketingApp';
+import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default () => {
@@ -7,22 +7,18 @@ export default () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (ref) {
-      const { onParentNavigate } = mount(ref.current, {
-        initialPath: history.location.pathname,
-        onNavigate: ({ pathname: nextPathname }) => {
-          const { pathname } = history.location;
+    const { onParentNavigate } = mount(ref.current, {
+      initialPath: history.location.pathname,
+      onNavigate: ({ pathname: nextPathname }) => {
+        const { pathname } = history.location;
 
-          // prevent history object change loop
-          // only if this things are different, we need to navigate
-          if (pathname !== nextPathname) {
-            history.push(nextPathname);
-          }
-        },
-      });
+        if (pathname !== nextPathname) {
+          history.push(nextPathname);
+        }
+      },
+    });
 
-      history.listen(onParentNavigate);
-    }
+    history.listen(onParentNavigate);
   }, []);
 
   return <div ref={ref} />;

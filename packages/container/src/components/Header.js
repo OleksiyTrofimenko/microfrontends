@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ isSignedIn, onSignOut }) => {
+export default function Header({ isSignedIn, onSignOut }) {
   const classes = useStyles();
 
   const onClick = () => {
@@ -95,6 +95,4 @@ const Header = ({ isSignedIn, onSignOut }) => {
       </AppBar>
     </React.Fragment>
   );
-};
-
-export default Header;
+}
